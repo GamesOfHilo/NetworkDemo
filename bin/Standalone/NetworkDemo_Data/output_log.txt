@@ -1,0 +1,37 @@
+Initialize engine version: 4.5.2f1 (9abb1b59b47c)
+GfxDevice: creating device client; threaded=1
+Direct3D:
+    Version:  Direct3D 11.0 [level 11.0]
+    Renderer: AMD Radeon HD 7800 Series (ID=0x6818)
+    Vendor:   ATI
+    VRAM:     2030 MB
+Begin MonoManager ReloadAssembly
+Platform assembly: F:\Programmieren\Unity\NetworkDemo\bin\Standalone\NetworkDemo_Data\Managed\UnityEngine.dll (this message is harmless)
+Loading F:\Programmieren\Unity\NetworkDemo\bin\Standalone\NetworkDemo_Data\Managed\UnityEngine.dll into Unity Child Domain
+Platform assembly: F:\Programmieren\Unity\NetworkDemo\bin\Standalone\NetworkDemo_Data\Managed\Assembly-CSharp-firstpass.dll (this message is harmless)
+Loading F:\Programmieren\Unity\NetworkDemo\bin\Standalone\NetworkDemo_Data\Managed\Assembly-CSharp-firstpass.dll into Unity Child Domain
+Platform assembly: F:\Programmieren\Unity\NetworkDemo\bin\Standalone\NetworkDemo_Data\Managed\Assembly-CSharp.dll (this message is harmless)
+Loading F:\Programmieren\Unity\NetworkDemo\bin\Standalone\NetworkDemo_Data\Managed\Assembly-CSharp.dll into Unity Child Domain
+Platform assembly: F:\Programmieren\Unity\NetworkDemo\bin\Standalone\NetworkDemo_Data\Managed\Assembly-UnityScript-firstpass.dll (this message is harmless)
+Loading F:\Programmieren\Unity\NetworkDemo\bin\Standalone\NetworkDemo_Data\Managed\Assembly-UnityScript-firstpass.dll into Unity Child Domain
+- Completed reload, in  0.057 seconds
+desktop: 1920x1200 60Hz; virtual: 3840x1200 at -1920,0
+<RI> Initializing input.
+<RI> Input initialized.
+Connecting
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+NoError
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Connected
+ 
+(Filename: C:/BuildAgent/work/d63dfc6385190b60/artifacts/StandalonePlayerGenerated/UnityEngineDebug.cpp Line: 49)
+
+Platform assembly: F:\Programmieren\Unity\NetworkDemo\bin\Standalone\NetworkDemo_Data\Managed\Boo.Lang.dll (this message is harmless)
+The server has disconnected from the client. Most likely the server has shut down.
+ 
+(Filename:  Line: 745)
+
