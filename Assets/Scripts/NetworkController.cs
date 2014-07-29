@@ -12,10 +12,12 @@ public class NetworkController : MonoBehaviour
     public GameObject Spawn;
     public GameObject PlayerPrefab;
 
+
+    private GameObject playerobj =null;
     // Use this for initialization
     void Start()
     {
-
+        playerobj = Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation) as GameObject;
     }
 
     // Update is called once per frame
@@ -68,10 +70,9 @@ public class NetworkController : MonoBehaviour
 
     private void ConnectionReady()
     {
+        Destroy(playerobj);
         isConnected = true;
         var player = Network.Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation, 0) as GameObject;
-        player.GetComponent<CharacterMotor>().canControl = true;
-        player.GetComponent<MouseLook>().canControl = true;
     }
 
 }
