@@ -38,7 +38,8 @@ public class MovmentController : MonoBehaviour
             xRotation -= Input.GetAxis("Mouse Y");
             xRotation = Mathf.Clamp(xRotation, DownAngleMax, UpAngleMax);
             rigidbody.position += Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
-            GetComponentInChildren<Camera>().transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
+            rigidbody.rotation = Quaternion.Euler(0, yRotation, 0);
+            GetComponentInChildren<Camera>().transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
         }
     }
 }
