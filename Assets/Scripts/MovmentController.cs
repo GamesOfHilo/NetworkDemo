@@ -12,10 +12,13 @@ public class MovmentController : MonoBehaviour
     private float yRotation = 0.0f;
     private float xRotation = 0.0f;
 
+    private NetworkController networkcontroller;
+
     // Use this for initialization
     void Start()
     {
         rigidbody.freezeRotation = true;
+        networkcontroller = GameObject.Find("GameController").GetComponent<NetworkController>();
     }
 
     // Update is called once per frame
@@ -26,8 +29,7 @@ public class MovmentController : MonoBehaviour
 
     void FixedUpdate()
     {
-        print(networkView.isMine);
-        if (networkView.isMine)
+        if (networkView.isMine || !networkcontroller.isConnected)
         {
             print("Update!");
             yRotation += Input.GetAxis("Mouse X");

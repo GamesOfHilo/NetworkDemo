@@ -5,19 +5,21 @@ public class NetworkController : MonoBehaviour
 {
 
     private bool isHost = false;
-    private bool isConnected = false;
     private string ip = "IP";
-
+    private GameObject playerobj = null;
 
     public GameObject Spawn;
     public GameObject PlayerPrefab;
 
 
-    private GameObject playerobj =null;
+    public bool isConnected { get; protected set; }
+    
     // Use this for initialization
     void Start()
     {
         playerobj = Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation) as GameObject;
+        playerobj.GetComponentInChildren<Camera>().enabled = true;
+        isConnected = false;
     }
 
     // Update is called once per frame
@@ -73,6 +75,6 @@ public class NetworkController : MonoBehaviour
         Destroy(playerobj);
         isConnected = true;
         var player = Network.Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation, 0) as GameObject;
+        player.GetComponentInChildren<Camera>().enabled = true;
     }
-
 }
