@@ -30,11 +30,15 @@ public class MovmentController : MonoBehaviour
         networkController = GameObject.Find("GameController").GetComponent<NetworkController>();
     }
 
+
+
     // Update is called once per frame
     void Update()
     {
-
+        if (rigidbody.GetRelativePointVelocity(GravityDirection.normalized).magnitude < 0.01f)
+            jumps = false;
     }
+
 
     void FixedUpdate()
     {
@@ -47,7 +51,7 @@ public class MovmentController : MonoBehaviour
             rigidbody.rotation = Quaternion.Euler(0, yRotation, 0);
             GetComponentInChildren<Camera>().transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
-            if (Input.GetAxis("Jump") > 0.8f)
+            if (Input.GetAxis("Jump") > 0.8f && !jumps)
             {
                 rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
                 jumps = true;
