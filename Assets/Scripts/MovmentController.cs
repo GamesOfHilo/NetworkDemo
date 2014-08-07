@@ -9,6 +9,9 @@ public class MovmentController : MonoBehaviour
     public Vector2 speed;
     public Vector2 camspeed;
 
+    public float UpAngleMax = 90.0f;
+    public float DownAngleMax = -90.0f;
+
     private float yRotation = 0.0f;
     private float xRotation = 0.0f;
 
@@ -31,9 +34,9 @@ public class MovmentController : MonoBehaviour
     {
         if (networkView.isMine || !networkcontroller.isConnected)
         {
-            print("Update!");
             yRotation += Input.GetAxis("Mouse X");
             xRotation -= Input.GetAxis("Mouse Y");
+            xRotation = Mathf.Clamp(xRotation, DownAngleMax, UpAngleMax);
             rigidbody.position += Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
             GetComponentInChildren<Camera>().transform.localRotation = Quaternion.Euler(xRotation, yRotation, 0);
         }

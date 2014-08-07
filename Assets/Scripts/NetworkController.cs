@@ -60,12 +60,10 @@ public class NetworkController : MonoBehaviour
 
     void OnPlayerConnected(NetworkPlayer player)
     {
-        print("Player connected");
         ConnectionReady();
     }
     void OnConnectedToServer()
     {
-        print("Connected");
         ConnectionReady();
     }
 
