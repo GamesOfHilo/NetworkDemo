@@ -6,8 +6,8 @@ using System.Collections;
 public class MovmentController : MonoBehaviour
 {
 
-    public Vector2 speed;
-    public Vector2 camspeed;
+    public Vector2 speed = Vector3.one;
+    public Vector2 camspeed = Vector3.one;
 
     public float UpAngleMax = 90.0f;
     public float DownAngleMax = -90.0f;
@@ -15,13 +15,19 @@ public class MovmentController : MonoBehaviour
     private float yRotation = 0.0f;
     private float xRotation = 0.0f;
 
-    private NetworkController networkcontroller;
+    private NetworkController networkController;
+
+    public bool useGravity = true;
+    public Vector3 GravityDirection = Vector3.down;
+    public float jumpForce = 2.0f;
+
+    private bool jumps = false;
 
     // Use this for initialization
     void Start()
     {
         rigidbody.freezeRotation = true;
-        networkcontroller = GameObject.Find("GameController").GetComponent<NetworkController>();
+        networkController = GameObject.Find("GameController").GetComponent<NetworkController>();
     }
 
     // Update is called once per frame
@@ -32,14 +38,24 @@ public class MovmentController : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (networkView.isMine || !networkcontroller.isConnected)
+        if (networkView.isMine || !networkController.isConnected)
         {
-            yRotation += Input.GetAxis("Mouse X");
-            xRotation -= Input.GetAxis("Mouse Y");
+            yRotation += Input.GetAxis("Mouse X") * camspeed.y;
+            xRotation -= Input.GetAxis("Mouse Y") * camspeed.x;
             xRotation = Mathf.Clamp(xRotation, DownAngleMax, UpAngleMax);
-            rigidbody.position += Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical")));
+            rigidbody.position += Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal") * speed.x, 0, Input.GetAxis("Vertical") * speed.y));
             rigidbody.rotation = Quaternion.Euler(0, yRotation, 0);
             GetComponentInChildren<Camera>().transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+
+            if (Input.GetAxis("Jump") > 0.8f)
+            {
+                rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+                jumps = true;
+            }
+            if (useGravity)
+            {
+                rigidbody.AddForce(GravityDirection.normalized * 9.81f, ForceMode.Force);
+            }
         }
     }
 }
