@@ -13,7 +13,8 @@ public class MovmentController : MonoBehaviour
     public event EventHandler<StartSprintingEventArgs> StartSprinting;
     public event EventHandler<EndSprintingEventArgs> EndSprinting;
 
-    public event EventHandler<
+    public event EventHandler<BeginWalkEventArgs> BeginWalk;
+    public event EventHandler<EndWalkEventArgs> EndWalk;
 
     public Vector2 VelocityMulitplier = Vector3.one;
     public Vector2 camspeed = Vector3.one;
