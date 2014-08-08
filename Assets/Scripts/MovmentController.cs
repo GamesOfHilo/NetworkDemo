@@ -6,8 +6,10 @@ using System.Collections;
 public class MovmentController : MonoBehaviour
 {
 
-    public Vector2 speed = Vector3.one;
+    public Vector2 AcclerationMultiplier = Vector3.one;
     public Vector2 camspeed = Vector3.one;
+
+    public float maxSpeed ;
 
     public float UpAngleMax = 90.0f;
     public float DownAngleMax = -90.0f;
@@ -47,7 +49,12 @@ public class MovmentController : MonoBehaviour
             yRotation += Input.GetAxis("Mouse X") * camspeed.y;
             xRotation -= Input.GetAxis("Mouse Y") * camspeed.x;
             xRotation = Mathf.Clamp(xRotation, DownAngleMax, UpAngleMax);
-            rigidbody.position += Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal") * speed.x, 0, Input.GetAxis("Vertical") * speed.y));
+            rigidbody.velocity +=
+                //rigidbody.position +=
+            Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal") * AcclerationMultiplier.x, 0, Input.GetAxis("Vertical") * AcclerationMultiplier.y));
+            if (rigidbody.velocity.magnitude > maxSpeed)
+                rigidbody.velocity = rigidbody.velocity.normalized * maxSpeed;
+
             rigidbody.rotation = Quaternion.Euler(0, yRotation, 0);
             GetComponentInChildren<Camera>().transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
