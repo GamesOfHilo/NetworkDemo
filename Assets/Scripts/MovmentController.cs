@@ -50,8 +50,8 @@ public class MovmentController : MonoBehaviour
             xRotation = Mathf.Clamp(xRotation, DownAngleMax, UpAngleMax);
 
             rigidbody.velocity += Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal") * AcclerationMultiplier.x, 0, Input.GetAxis("Vertical") * AcclerationMultiplier.y));
-            if (((Vector2)rigidbody.velocity).magnitude > maxSpeed)
-                rigidbody.velocity = ((Vector2)rigidbody.velocity).normalized * maxSpeed;
+            if (rigidbody.velocity.getPlainMagnitude() > maxSpeed)
+                rigidbody.velocity = (rigidbody.velocity.toPlainVector2() * maxSpeed).toVector3();
 
             rigidbody.rotation = Quaternion.Euler(0, yRotation, 0);
             GetComponentInChildren<Camera>().transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
@@ -67,4 +67,6 @@ public class MovmentController : MonoBehaviour
             }
         }
     }
+
+
 }
