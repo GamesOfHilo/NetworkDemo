@@ -9,8 +9,7 @@ public class MovmentController : MonoBehaviour
     public Vector2 VelocityMulitplier = Vector3.one;
     public Vector2 camspeed = Vector3.one;
 
-    public float maxWalkSpeed;
-    public float maxSprintSpeed;
+    public Vector2 SprintMultiplier = new Vector2(2, 2);
 
     public float UpAngleMax = 90.0f;
     public float DownAngleMax = -90.0f;
@@ -25,6 +24,7 @@ public class MovmentController : MonoBehaviour
     public float jumpForce = 2.0f;
 
     private bool jumps = false;
+    private bool sprints = false;
 
     // Use this for initialization
     void Start()
@@ -54,8 +54,12 @@ public class MovmentController : MonoBehaviour
             xRotation -= Input.GetAxis("Mouse Y") * camspeed.x;
             xRotation = Mathf.Clamp(xRotation, DownAngleMax, UpAngleMax);
 
+            sprints = Input.GetAxis("Sprint") > 0.8f;
+
             if (!jumps)
-                rigidbody.velocity = Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal") * VelocityMulitplier.x, rigidbody.velocity.y, Input.GetAxis("Vertical") * VelocityMulitplier.y));
+                rigidbody.velocity = Quaternion.Euler(0, yRotation, 0) *
+                    (new Vector3(Input.GetAxis("Horizontal") * VelocityMulitplier.x * (sprints ? SprintMultiplier.x : 1),
+                    rigidbody.velocity.y, Input.GetAxis("Vertical") * VelocityMulitplier.y * (sprints ? SprintMultiplier.y : 1)));
 
             rigidbody.rotation = Quaternion.Euler(0, yRotation, 0);
             GetComponentInChildren<Camera>().transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
