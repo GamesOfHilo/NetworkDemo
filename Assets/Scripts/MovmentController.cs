@@ -1,10 +1,19 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
+using MovementEventArgs;
 
 [RequireComponent(typeof(NetworkView))]
 [RequireComponent(typeof(Rigidbody))]
 public class MovmentController : MonoBehaviour
 {
+
+    public event EventHandler<JumpEventArgs> Jump;
+    public event EventHandler<LandedEventArgs> Landed;
+    public event EventHandler<StartSprintingEventArgs> StartSprinting;
+    public event EventHandler<EndSprintingEventArgs> EndSprinting;
+
+    public event EventHandler<
 
     public Vector2 VelocityMulitplier = Vector3.one;
     public Vector2 camspeed = Vector3.one;
@@ -22,6 +31,8 @@ public class MovmentController : MonoBehaviour
     public bool useGravity = true;
     public float gravityForce = 2.0f;
     public float jumpForce = 2.0f;
+
+    public bool useSendMessage = false;
 
     private bool jumps = false;
     private bool sprints = false;
