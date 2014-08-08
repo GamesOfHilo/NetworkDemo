@@ -67,8 +67,14 @@ public class NetworkController : MonoBehaviour
     {
         Destroy(playerobj);
         isConnected = true;
-        var player = Network.Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation, 0) as GameObject;
-        player.GetComponentInChildren<Camera>().enabled = true;
+        playerobj = Network.Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation, 0) as GameObject;
+        playerobj.GetComponentInChildren<Camera>().enabled = true;
         playerobj.GetComponentInChildren<AudioListener>().enabled = true;
+    }
+
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.U))
+            playerobj.transform.position = Spawn.transform.position;
     }
 }
