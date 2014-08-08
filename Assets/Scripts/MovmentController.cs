@@ -10,7 +10,7 @@ public class MovmentController : MonoBehaviour
 
     public event EventHandler<JumpEventArgs> Jump;
     public event EventHandler<LandedEventArgs> Landed;
-    public event EventHandler<StartSprintingEventArgs> StartSprinting;
+    public event EventHandler<BeginSprintingEventArgs> BeginSprinting;
     public event EventHandler<EndSprintingEventArgs> EndSprinting;
 
     public event EventHandler<BeginWalkEventArgs> BeginWalk;

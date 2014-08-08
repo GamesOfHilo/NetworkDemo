@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MovementEventArgs
 {
-    public class StartSprintingEventArgs : EventArgs
+    public class BeginSprintingEventArgs : EventArgs
     {
     }
 }
