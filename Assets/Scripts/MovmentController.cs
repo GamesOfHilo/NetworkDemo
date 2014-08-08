@@ -20,6 +20,7 @@ public class MovmentController : MonoBehaviour
     private NetworkController networkController;
 
     public bool useGravity = true;
+    public float gravityForce = 2.0f;
     public float jumpForce = 2.0f;
 
     private bool jumps = false;
@@ -36,7 +37,7 @@ public class MovmentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (rigidbody.GetRelativePointVelocity(Vector3.down.normalized).magnitude < 0.01f)
+        if (rigidbody.GetRelativePointVelocity(Vector3.down).magnitude < 0.01f)
             jumps = false;
     }
 
@@ -49,9 +50,7 @@ public class MovmentController : MonoBehaviour
             xRotation -= Input.GetAxis("Mouse Y") * camspeed.x;
             xRotation = Mathf.Clamp(xRotation, DownAngleMax, UpAngleMax);
 
-            rigidbody.velocity += Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal") * AcclerationMultiplier.x, 0, Input.GetAxis("Vertical") * AcclerationMultiplier.y));
-            if (rigidbody.velocity.getPlainMagnitude() > maxSpeed)
-                rigidbody.velocity = (rigidbody.velocity.toPlainVector2() * maxSpeed).toVector3();
+            rigidbody.velocity = Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal") * AcclerationMultiplier.x, rigidbody.velocity.y, Input.GetAxis("Vertical") * AcclerationMultiplier.y));
 
             rigidbody.rotation = Quaternion.Euler(0, yRotation, 0);
             GetComponentInChildren<Camera>().transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
@@ -63,7 +62,7 @@ public class MovmentController : MonoBehaviour
             }
             if (useGravity)
             {
-                rigidbody.AddForce(Vector3.down.normalized * 9.81f, ForceMode.Force);
+                rigidbody.AddForce(Vector3.down * 9.81f * gravityForce, ForceMode.Acceleration);
             }
         }
     }
