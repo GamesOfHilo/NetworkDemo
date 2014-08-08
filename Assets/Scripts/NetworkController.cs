@@ -13,7 +13,7 @@ public class NetworkController : MonoBehaviour
 
 
     public bool isConnected { get; protected set; }
-    
+
     // Use this for initialization
     void Start()
     {
@@ -21,12 +21,6 @@ public class NetworkController : MonoBehaviour
         playerobj.GetComponentInChildren<Camera>().enabled = true;
         playerobj.GetComponentInChildren<AudioListener>().enabled = true;
         isConnected = false;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
     }
 
     void OnGUI()
