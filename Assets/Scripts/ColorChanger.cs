@@ -45,7 +45,7 @@ public class ColorChanger : MonoBehaviour
     {
         if (stream.isWriting)
         {
-            var color = material.color;
+            var color = material == null ? Color.white : material.color;
             var value = new Vector3(color.r, color.g, color.b);
             stream.Serialize(ref value);
         }
