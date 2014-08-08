@@ -9,7 +9,8 @@ public class MovmentController : MonoBehaviour
     public Vector2 VelocityMulitplier = Vector3.one;
     public Vector2 camspeed = Vector3.one;
 
-    public float maxSpeed;
+    public float maxWalkSpeed;
+    public float maxSprintSpeed;
 
     public float UpAngleMax = 90.0f;
     public float DownAngleMax = -90.0f;
@@ -43,7 +44,7 @@ public class MovmentController : MonoBehaviour
         if (rigidbody.velocity.y < 0.01f)
             jumps = false;
     }
-    
+
 
     void FixedUpdate()
     {
@@ -53,7 +54,8 @@ public class MovmentController : MonoBehaviour
             xRotation -= Input.GetAxis("Mouse Y") * camspeed.x;
             xRotation = Mathf.Clamp(xRotation, DownAngleMax, UpAngleMax);
 
-            rigidbody.velocity = Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal") * VelocityMulitplier.x, rigidbody.velocity.y, Input.GetAxis("Vertical") * VelocityMulitplier.y));
+            if (!jumps)
+                rigidbody.velocity = Quaternion.Euler(0, yRotation, 0) * (new Vector3(Input.GetAxis("Horizontal") * VelocityMulitplier.x, rigidbody.velocity.y, Input.GetAxis("Vertical") * VelocityMulitplier.y));
 
             rigidbody.rotation = Quaternion.Euler(0, yRotation, 0);
             GetComponentInChildren<Camera>().transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
