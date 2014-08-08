@@ -8,13 +8,51 @@ using MovementEventArgs;
 public class MovmentController : MonoBehaviour
 {
 
+    #region Events
     public event EventHandler<JumpEventArgs> Jump;
+    protected void FireJump()
+    {
+        var myevent = Jump;
+        if (myevent != null)
+            myevent(this, null);
+    }
     public event EventHandler<LandedEventArgs> Landed;
+    protected void FireLanded()
+    {
+        var myevent = Landed;
+        if (myevent != null)
+            myevent(this, null);
+    }
     public event EventHandler<BeginSprintingEventArgs> BeginSprinting;
+    protected void FireBeginSprinting()
+    {
+        var myevent = BeginSprinting;
+        if (myevent != null)
+            myevent(this, null);
+    }
     public event EventHandler<EndSprintingEventArgs> EndSprinting;
+    protected void FireEndSprinting()
+    {
+        var myevent = EndSprinting;
+        if (myevent != null)
+            myevent(this, null);
+    }
 
     public event EventHandler<BeginWalkEventArgs> BeginWalk;
+    protected void FireBeginWalk()
+    {
+        var myevent = BeginWalk;
+        if (myevent != null)
+            myevent(this, null);
+    }
     public event EventHandler<EndWalkEventArgs> EndWalk;
+    protected void FireEndWalk()
+    {
+        var myevent = EndWalk;
+        if (myevent != null)
+            myevent(this, null);
+    }
+    #endregion
 
     public Vector2 VelocityMulitplier = Vector3.one;
     public Vector2 camspeed = Vector3.one;

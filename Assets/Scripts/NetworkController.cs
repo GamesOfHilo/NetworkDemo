@@ -19,6 +19,7 @@ public class NetworkController : MonoBehaviour
     {
         playerobj = Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation) as GameObject;
         playerobj.GetComponentInChildren<Camera>().enabled = true;
+        playerobj.GetComponentInChildren<AudioListener>().enabled = true;
         isConnected = false;
     }
 
@@ -74,5 +75,6 @@ public class NetworkController : MonoBehaviour
         isConnected = true;
         var player = Network.Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation, 0) as GameObject;
         player.GetComponentInChildren<Camera>().enabled = true;
+        playerobj.GetComponentInChildren<AudioListener>().enabled = true;
     }
 }
