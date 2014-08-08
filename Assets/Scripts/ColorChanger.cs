@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Renderer))]
+[RequireComponent(typeof(NetworkView))]
 public class ColorChanger : MonoBehaviour
 {
     Material material;
