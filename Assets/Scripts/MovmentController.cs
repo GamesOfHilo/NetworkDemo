@@ -33,14 +33,17 @@ public class MovmentController : MonoBehaviour
     }
 
 
-
     // Update is called once per frame
     void Update()
     {
-        if (rigidbody.GetRelativePointVelocity(Vector3.down).magnitude < 0.01f)
-            jumps = false;
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (rigidbody.velocity.y < 0.01f)
+            jumps = false;
+    }
+    
 
     void FixedUpdate()
     {
