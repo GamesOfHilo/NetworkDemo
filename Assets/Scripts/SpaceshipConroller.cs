@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class Spaceship_Conroll : MonoBehaviour
+public class SpaceshipConroller : MonoBehaviour
 {
 	float geschwindigkeit;
 	public int standartGeschwindigkeit;
@@ -49,7 +49,7 @@ public class Spaceship_Conroll : MonoBehaviour
 			angVel.z -= 50;
 			geschwindigkeit -= 5 * Time.fixedDeltaTime;
 		}
-.
+
 		angVel /= 1 + deltaSpeed * .001f;
 
 		angVel -= angVel.normalized * angVel.sqrMagnitude * .08f * Time.fixedDeltaTime;
@@ -60,13 +60,13 @@ public class Spaceship_Conroll : MonoBehaviour
 		
 		deltaSpeed = geschwindigkeit - standartGeschwindigkeit;
 
-		decel = geschwindigkeit - minSpeed;
-		accel = maxSpeed - geschwindigkeit;
+        bremsen = geschwindigkeit - minSpeed;
+        beschleunigung = maxSpeed - geschwindigkeit;
 
 		if (Input.GetKey(KeyCode.Joystick1Button1) || Input.GetKey(KeyCode.LeftShift))
 			geschwindigkeit = geschwindigkeit + 100 * Time.fixedDeltaTime;
 		else if (Input.GetKey(KeyCode.Joystick1Button0) || Input.GetKey(KeyCode.Space))
-			geschwindigkeit -= decel * Time.fixedDeltaTime;
+            geschwindigkeit -= bremsen * Time.fixedDeltaTime;
 
 		else if (Mathf.Abs(deltaSpeed) > .1f)
 			geschwindigkeit -= Mathf.Clamp(deltaSpeed * Mathf.Abs(deltaSpeed), -30, 100) * Time.fixedDeltaTime;
