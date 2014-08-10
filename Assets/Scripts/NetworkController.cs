@@ -76,5 +76,7 @@ public class NetworkController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.U))
             playerobj.transform.position = Spawn.transform.position;
+        if (Input.GetKeyDown(KeyCode.Escape))
+            Application.Quit();
     }
 }
