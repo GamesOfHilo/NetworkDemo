@@ -15,6 +15,7 @@ public class MovmentController : MonoBehaviour
         var myevent = Jump;
         if (myevent != null)
             myevent(gameObject, null);
+        if (useSendMessage) SendMessage("OnJump", null);
     }
     public event EventHandler<FallsEventArgs> Falls;
     protected void FireFalls()
@@ -22,6 +23,7 @@ public class MovmentController : MonoBehaviour
         var myevent = Falls;
         if (myevent != null)
             myevent(gameObject, null);
+        if (useSendMessage) SendMessage("OnFalls", null);
     }
     public event EventHandler<LandedEventArgs> Landed;
     protected void FireLanded()
@@ -29,6 +31,7 @@ public class MovmentController : MonoBehaviour
         var myevent = Landed;
         if (myevent != null)
             myevent(gameObject, null);
+        if (useSendMessage) SendMessage("OnLanded", null);
     }
     public event EventHandler<BeginSprintingEventArgs> BeginSprinting;
     protected void FireBeginSprinting()
@@ -36,6 +39,7 @@ public class MovmentController : MonoBehaviour
         var myevent = BeginSprinting;
         if (myevent != null)
             myevent(gameObject, null);
+        if (useSendMessage) SendMessage("OnBeginSprinting", null);
     }
     public event EventHandler<EndSprintingEventArgs> EndSprinting;
     protected void FireEndSprinting()
@@ -43,6 +47,7 @@ public class MovmentController : MonoBehaviour
         var myevent = EndSprinting;
         if (myevent != null)
             myevent(gameObject, null);
+        if (useSendMessage) SendMessage("OnEndSprinting", null);
     }
 
     public event EventHandler<BeginWalkEventArgs> BeginWalk;
@@ -51,6 +56,7 @@ public class MovmentController : MonoBehaviour
         var myevent = BeginWalk;
         if (myevent != null)
             myevent(gameObject, null);
+        if (useSendMessage) SendMessage("OnBeginWalk", null);
     }
     public event EventHandler<EndWalkEventArgs> EndWalk;
     protected void FireEndWalk()
@@ -58,6 +64,7 @@ public class MovmentController : MonoBehaviour
         var myevent = EndWalk;
         if (myevent != null)
             myevent(gameObject, null);
+        if (useSendMessage) SendMessage("OnEndWalk", null);
     }
     #endregion
 
