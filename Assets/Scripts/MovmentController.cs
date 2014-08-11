@@ -14,35 +14,35 @@ public class MovmentController : MonoBehaviour
     {
         var myevent = Jump;
         if (myevent != null)
-            myevent(this, null);
+            myevent(gameObject, null);
     }
     public event EventHandler<FallsEventArgs> Falls;
     protected void FireFalls()
     {
         var myevent = Falls;
         if (myevent != null)
-            myevent(this, null);
+            myevent(gameObject, null);
     }
     public event EventHandler<LandedEventArgs> Landed;
     protected void FireLanded()
     {
         var myevent = Landed;
         if (myevent != null)
-            myevent(this, null);
+            myevent(gameObject, null);
     }
     public event EventHandler<BeginSprintingEventArgs> BeginSprinting;
     protected void FireBeginSprinting()
     {
         var myevent = BeginSprinting;
         if (myevent != null)
-            myevent(this, null);
+            myevent(gameObject, null);
     }
     public event EventHandler<EndSprintingEventArgs> EndSprinting;
     protected void FireEndSprinting()
     {
         var myevent = EndSprinting;
         if (myevent != null)
-            myevent(this, null);
+            myevent(gameObject, null);
     }
 
     public event EventHandler<BeginWalkEventArgs> BeginWalk;
@@ -50,14 +50,14 @@ public class MovmentController : MonoBehaviour
     {
         var myevent = BeginWalk;
         if (myevent != null)
-            myevent(this, null);
+            myevent(gameObject, null);
     }
     public event EventHandler<EndWalkEventArgs> EndWalk;
     protected void FireEndWalk()
     {
         var myevent = EndWalk;
         if (myevent != null)
-            myevent(this, null);
+            myevent(gameObject, null);
     }
     #endregion
 
