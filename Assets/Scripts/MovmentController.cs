@@ -97,6 +97,41 @@ public class MovmentController : MonoBehaviour
     private bool sprints = false;
     #endregion
 
+
+    public float DistancetoGround
+    {
+        get
+        {
+            RaycastHit hit;
+            if (Physics.Raycast(transform.position, -Vector3.up, out hit, Mathf.Infinity))
+            {
+                return hit.distance;
+            }
+            return Mathf.Infinity;
+        }
+    }
+
+    public float BottomDistancetoGround { get { return DistancetoGround - MainCollider.bounds.extents.y; } }
+
+    private Collider _maincollider;
+    protected Collider MainCollider
+    {
+        get
+        {
+            if (_maincollider == null)
+                _maincollider = (new Func<Collider>(() =>
+                {
+                    Collider c;
+                    if ((c = GetComponent<Collider>()) != null) return c;
+                    if ((c = GetComponentInChildren<Collider>()) != null) return c;
+                    if ((c = GetComponentInParent<Collider>()) != null) return c;
+                    return null;
+                })).Invoke();
+            return _maincollider;
+
+        }
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -136,6 +171,7 @@ public class MovmentController : MonoBehaviour
             else FireEndWalk();
             lastMoving = moving;
         }
+        print(BottomDistancetoGround);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -177,6 +213,4 @@ public class MovmentController : MonoBehaviour
             }
         }
     }
-
-
 }
