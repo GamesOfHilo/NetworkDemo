@@ -54,6 +54,8 @@ public class MovmentController : MonoBehaviour
     }
     #endregion
 
+    #region Public Fields
+
     public Vector2 VelocityMulitplier = Vector3.one;
     public Vector2 camspeed = Vector3.one;
 
@@ -62,19 +64,23 @@ public class MovmentController : MonoBehaviour
     public float UpAngleMax = 90.0f;
     public float DownAngleMax = -90.0f;
 
-    private float yRotation = 0.0f;
-    private float xRotation = 0.0f;
-
-    private NetworkController networkController;
-
     public bool useGravity = true;
     public float gravityForce = 2.0f;
     public float jumpForce = 2.0f;
 
     public bool useSendMessage = false;
+    #endregion
+
+    #region Private Fields
+
+    private float yRotation = 0.0f;
+    private float xRotation = 0.0f;
+
+    private NetworkController networkController;
 
     private bool jumps = false;
     private bool sprints = false;
+    #endregion
 
     // Use this for initialization
     void Start()
