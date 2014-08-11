@@ -79,6 +79,7 @@ public class MovmentController : MonoBehaviour
     private NetworkController networkController;
 
     private bool jumps = false;
+    private bool falls = false;
     private bool sprints = false;
     #endregion
 
@@ -93,12 +94,25 @@ public class MovmentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (rigidbody.velocity.y < -0.1f)
+        {
+            falls = true;
+            jumps = false;
+        }
+        else if (rigidbody.velocity.y > 0.1)
+        {
+            falls = false;
+            jumps = true;
+        }
     }
 
     void OnCollisionEnter(Collision collision)
     {
-        if (rigidbody.velocity.y < 0.01f)
+        if (rigidbody.velocity.y < 0.1f && rigidbody.velocity.y > -0.1f)
+        {
             jumps = false;
+            falls = false;
+        }
     }
 
 
@@ -120,10 +134,9 @@ public class MovmentController : MonoBehaviour
             rigidbody.rotation = Quaternion.Euler(0, yRotation, 0);
             GetComponentInChildren<Camera>().transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
-            if (Input.GetAxis("Jump") > 0.8f && !jumps)
+            if (Input.GetAxis("Jump") > 0.8f && !(jumps || falls))
             {
                 rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-                jumps = true;
             }
             if (useGravity)
             {
