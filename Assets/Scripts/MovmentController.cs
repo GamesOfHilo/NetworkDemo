@@ -98,18 +98,36 @@ public class MovmentController : MonoBehaviour
     }
 
 
+    private bool lastSprint = false;
+    private bool lastMoving = false;
+    private bool moving = false;
     // Update is called once per frame
     void Update()
     {
+        moving = rigidbody.velocity.getPlainMagnitude() > 0.1f;
         if (rigidbody.velocity.y < -0.1f)
         {
             falls = true;
             jumps = false;
+            FireFalls();
         }
         else if (rigidbody.velocity.y > 0.1)
         {
             falls = false;
             jumps = true;
+            FireJump();
+        }
+        if (sprints != lastSprint)
+        {
+            if (sprints) FireBeginSprinting();
+            else FireEndSprinting();
+            lastSprint = sprints;
+        }
+        if (moving != lastMoving)
+        {
+            if (moving) FireBeginWalk();
+            else FireEndWalk();
+            lastMoving = moving;
         }
     }
 
@@ -119,6 +137,7 @@ public class MovmentController : MonoBehaviour
         {
             jumps = false;
             falls = false;
+            FireLanded();
         }
     }
 
