@@ -16,6 +16,13 @@ public class MovmentController : MonoBehaviour
         if (myevent != null)
             myevent(this, null);
     }
+    public event EventHandler<FallsEventArgs> Falls;
+    protected void FireFalls()
+    {
+        var myevent = Falls;
+        if (myevent != null)
+            myevent(this, null);
+    }
     public event EventHandler<LandedEventArgs> Landed;
     protected void FireLanded()
     {
