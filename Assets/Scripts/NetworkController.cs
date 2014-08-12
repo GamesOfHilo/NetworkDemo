@@ -69,8 +69,15 @@ public class NetworkController : MonoBehaviour
         Destroy(playerobj);
         isConnected = true;
         playerobj = Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation) as GameObject;
-        var view = Network.AllocateViewID();
-        networkView.RPC("PlayerInstantiate", RPCMode.Others, view, Spawn.transform.position, Spawn.transform.rotation);
+        var bodyview = Network.AllocateViewID();
+        var colorview = Network.AllocateViewID();
+        networkView.RPC("PlayerInstantiate", RPCMode.OthersBuffered, bodyview, colorview, Spawn.transform.position, Spawn.transform.rotation);
+        playerobj.GetComponent<NetworkView>().viewID = bodyview;
+
+        var body = playerobj.transform.Find("Body").gameObject;
+        print(body);
+        body.networkView.viewID = colorview;
+
         playerobj.GetComponentInChildren<Camera>().enabled = true;
         playerobj.GetComponentInChildren<AudioListener>().enabled = true;
     }
@@ -85,10 +92,11 @@ public class NetworkController : MonoBehaviour
 
 
     [RPC]
-    void PlayerInstantiate(NetworkViewID bodyView,NetworkViewID colorView, Vector3 location, Quaternion rotation)
+    void PlayerInstantiate(NetworkViewID bodyView, NetworkViewID colorView, Vector3 location, Quaternion rotation)
     {
         var instant = Instantiate(PlayerPrefab, location, rotation) as GameObject;
         instant.GetComponent<NetworkView>().viewID = bodyView;
-        instant.GetComponentInChildren<NetworkView>().viewID = colorView;
+        var body = instant.transform.Find("Body").gameObject;
+        body.networkView.viewID = colorView;
     }
 }
