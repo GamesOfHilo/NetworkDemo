@@ -75,7 +75,6 @@ public class NetworkController : MonoBehaviour
         playerobj.GetComponent<NetworkView>().viewID = bodyview;
 
         var body = playerobj.transform.Find("Body").gameObject;
-        print(body);
         body.networkView.viewID = colorview;
 
         playerobj.GetComponentInChildren<Camera>().enabled = true;
