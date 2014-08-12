@@ -70,7 +70,7 @@ public class NetworkController : MonoBehaviour
         isConnected = true;
         playerobj = Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation) as GameObject;
         var view = Network.AllocateViewID();
-        networkView.RPC("CustomInstantiate", RPCMode.Others, PlayerPrefab, view, view, Spawn.transform.position, Spawn.transform.rotation);
+        networkView.RPC("PlayerInstantiate", RPCMode.Others, view, Spawn.transform.position, Spawn.transform.rotation);
         playerobj.GetComponentInChildren<Camera>().enabled = true;
         playerobj.GetComponentInChildren<AudioListener>().enabled = true;
     }
@@ -85,9 +85,9 @@ public class NetworkController : MonoBehaviour
 
 
     [RPC]
-    void CustomInstantiate(GameObject obj, NetworkViewID view, Vector3 location, Quaternion rotation)
+    void PlayerInstantiate(NetworkViewID view, Vector3 location, Quaternion rotation)
     {
-        var instant = Instantiate(obj, location, rotation) as GameObject;
+        var instant = Instantiate(PlayerPrefab, location, rotation) as GameObject;
         instant.GetComponent<NetworkView>().viewID = view;
     }
 }
