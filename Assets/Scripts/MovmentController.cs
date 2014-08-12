@@ -171,7 +171,6 @@ public class MovmentController : MonoBehaviour
             else FireEndWalk();
             lastMoving = moving;
         }
-        print(BottomDistancetoGround);
     }
 
     void OnCollisionEnter(Collision collision)
