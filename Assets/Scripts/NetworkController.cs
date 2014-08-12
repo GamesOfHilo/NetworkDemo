@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(NetworkView))]
 public class NetworkController : MonoBehaviour
 {
 
@@ -67,9 +68,18 @@ public class NetworkController : MonoBehaviour
     {
         Destroy(playerobj);
         isConnected = true;
-        playerobj = Network.Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation, 0) as GameObject;
+        playerobj = Instantiate(PlayerPrefab, Spawn.transform.position, Spawn.transform.rotation) as GameObject;
+        var bodyview = Network.AllocateViewID();
+        var colorview = Network.AllocateViewID();
+        networkView.RPC("PlayerInstantiate", RPCMode.OthersBuffered, bodyview, colorview, Spawn.transform.position, Spawn.transform.rotation);
+        playerobj.GetComponent<NetworkView>().viewID = bodyview;
+
+        var body = playerobj.transform.Find("Body").gameObject;
+        body.networkView.viewID = colorview;
+
         playerobj.GetComponentInChildren<Camera>().enabled = true;
         playerobj.GetComponentInChildren<AudioListener>().enabled = true;
+        playerobj.AddComponent<PlayerLocal>();
     }
 
     void Update()
@@ -78,5 +88,16 @@ public class NetworkController : MonoBehaviour
             playerobj.transform.position = Spawn.transform.position;
         if (Input.GetKeyDown(KeyCode.Escape))
             Application.Quit();
+    }
+
+
+    [RPC]
+    void PlayerInstantiate(NetworkViewID bodyView, NetworkViewID colorView, Vector3 location, Quaternion rotation)
+    {
+        var instant = Instantiate(PlayerPrefab, location, rotation) as GameObject;
+        instant.GetComponent<NetworkView>().viewID = bodyView;
+        var body = instant.transform.Find("Body").gameObject;
+        body.networkView.viewID = colorView;
+        instant.AddComponent<PlayerRemote>();
     }
 }
