@@ -85,9 +85,10 @@ public class NetworkController : MonoBehaviour
 
 
     [RPC]
-    void PlayerInstantiate(NetworkViewID view, Vector3 location, Quaternion rotation)
+    void PlayerInstantiate(NetworkViewID bodyView,NetworkViewID colorView, Vector3 location, Quaternion rotation)
     {
         var instant = Instantiate(PlayerPrefab, location, rotation) as GameObject;
-        instant.GetComponent<NetworkView>().viewID = view;
+        instant.GetComponent<NetworkView>().viewID = bodyView;
+        instant.GetComponentInChildren<NetworkView>().viewID = colorView;
     }
 }
