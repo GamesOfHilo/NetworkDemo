@@ -192,6 +192,7 @@ public class MovmentController : MonoBehaviour
             yRotation += Input.GetAxis("Mouse X") * camspeed.y;
             xRotation -= Input.GetAxis("Mouse Y") * camspeed.x;
             xRotation = Mathf.Clamp(xRotation, DownAngleMax, UpAngleMax);
+            yRotation = yRotation % 360;
 
             sprints = Input.GetAxis("Sprint") > 0.8f;
 
