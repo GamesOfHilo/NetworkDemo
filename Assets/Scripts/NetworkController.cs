@@ -79,6 +79,7 @@ public class NetworkController : MonoBehaviour
 
         playerobj.GetComponentInChildren<Camera>().enabled = true;
         playerobj.GetComponentInChildren<AudioListener>().enabled = true;
+        playerobj.AddComponent<PlayerLocal>();
     }
 
     void Update()
@@ -97,5 +98,6 @@ public class NetworkController : MonoBehaviour
         instant.GetComponent<NetworkView>().viewID = bodyView;
         var body = instant.transform.Find("Body").gameObject;
         body.networkView.viewID = colorView;
+        instant.AddComponent<PlayerRemote>();
     }
 }

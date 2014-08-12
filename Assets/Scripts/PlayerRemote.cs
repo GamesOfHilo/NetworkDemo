@@ -119,7 +119,7 @@ public class PlayerRemote : MonoBehaviour
             if (stateCount == 0) return;
             p = states[0].p;
             r = states[0].r;
-            m = (int)(Network.time - states[0].t) * 1000;	//m is the number of milliseconds that transpire between the packet's original send time and the time it is resent from the server to all the other clients
+            m = (int)((Network.time - states[0].t) * 1000);	//m is the number of milliseconds that transpire between the packet's original send time and the time it is resent from the server to all the other clients
             stream.Serialize(ref p);
             stream.Serialize(ref r);
             stream.Serialize(ref m);
