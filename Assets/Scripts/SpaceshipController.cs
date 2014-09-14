@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class SpaceshipConroller : MonoBehaviour
+public class SpaceshipController : MonoBehaviour
 {
 	float geschwindigkeit;
 	public int standartGeschwindigkeit;
